@@ -58,7 +58,12 @@ scripts/stop-backend.sh                                   # graceful SIGTERM
 
 First boot runs alembic migrations on the SQLite settings DB at `<data_dir>/omnivoice.db`. Idempotent — safe to re-run.
 
-First synthesis call lazy-downloads the `k2-fsa/OmniVoice` model (~2.4 GB) into `~/.cache/huggingface/hub/`. Cached on subsequent boots.
+First synthesis call lazy-downloads the `k2-fsa/OmniVoice` model (~2.4 GB) into the HuggingFace cache. Path varies by OS:
+
+- **macOS / Linux**: `~/.cache/huggingface/hub/`
+- **Windows**: `%LOCALAPPDATA%\OmniVoice\hf_cache` (OmniVoice redirects via `backend/core/config.py` to keep the cache off the system drive root)
+
+Cached on subsequent boots.
 
 ## Idle Behavior
 
